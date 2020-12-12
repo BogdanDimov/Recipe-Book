@@ -1,3 +1,4 @@
+import { RecipeService } from '../recipes/recipe.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   collapsed = true;
+
+  constructor(private recipeService: RecipeService) { }
+
+  onSaveData(): void {
+    this.recipeService.storeRecipes();
+  }
+
+  onFetchData(): void {
+    this.recipeService.fetchRecipes().subscribe();
+  }
 }
