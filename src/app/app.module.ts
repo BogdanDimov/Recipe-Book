@@ -1,6 +1,7 @@
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { HeaderComponent } from './header/header.component';
@@ -19,7 +20,7 @@ import { SpinnerContainerComponent } from './shared/spinner-container/spinner-co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgModule } from '@angular/core';
 
@@ -53,7 +54,8 @@ import { NgModule } from '@angular/core';
     ShoppingListService,
     RecipeService,
     RecipesResolverService,
-    AuthService],
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

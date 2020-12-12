@@ -1,4 +1,5 @@
 import { Recipe } from './recipe.model';
+import { AuthService } from '../auth/auth.service';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { HttpClient } from '@angular/common/http';
@@ -48,16 +49,18 @@ export class RecipeService {
 
   fetchRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>('https://recipe-book-3e419-default-rtdb.europe-west1.firebasedatabase.app/recipes.json')
+      .get<Recipe[]>(
+        'https://recipe-book-3e419-default-rtdb.europe-west1.firebasedatabase.app/recipes.json'
+      )
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {
-            return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }
+            return {
+              ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []
+            }
           });
         }),
-        tap(
-          recipes => this.setRecipes(recipes)
-        )
+        tap(recipes => this.setRecipes(recipes))
       );
   }
 
