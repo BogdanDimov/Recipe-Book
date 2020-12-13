@@ -1,5 +1,4 @@
 import { Recipe } from './recipe.model';
-import { AuthService } from '../auth/auth.service';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { HttpClient } from '@angular/common/http';
