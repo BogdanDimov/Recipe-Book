@@ -1,6 +1,7 @@
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { DropdownDirective } from './shared/dropdown.directive';
@@ -55,7 +56,8 @@ import { NgModule } from '@angular/core';
     RecipeService,
     RecipesResolverService,
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

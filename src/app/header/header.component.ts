@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => this.isAuthenticated = !!user);
   }
 
+  onLogout(): void {
+    this.authService.logout();
+  }
+
   onSaveData(): void {
     this.recipeService.storeRecipes();
   }
@@ -29,6 +33,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.userSub.unsubscribe();
   }
 }
